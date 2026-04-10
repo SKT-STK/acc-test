@@ -166,7 +166,6 @@ fn main() {
                 let curr_bb = if curr_bb % 2 == 1 { curr_bb + 1 } else { curr_bb };
                 let bb_diff = curr_bb as i32 - bb as i32;
                 let bb_diff = bb_diff / 2;
-                println!("{} || {} || {}", bb_diff, curr_bb, bb);
                 let bb_bind = if bb_diff > 0 { bb_dec } else { bb_inc };
                 let bb_diff = bb_diff.abs();
 
