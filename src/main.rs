@@ -51,6 +51,7 @@ enum OptionsMode {
   BB {
     bb_inc: u16,
     bb_dec: u16,
+    bb_offset: i32,
     bb: u32
   }
 }
@@ -102,12 +103,13 @@ fn main() {
 
     options.push((perc, Options { mode: OptionsMode::TC { bind, min_speed } }));
   }
-  let mut bb_binds: (u16, u16) = (0x0, 0x0);
+  let mut bb_binds: (u16, u16, i32) = (0x0, 0x0, 0);
   for (i, group) in options_str_bb.iter().enumerate() {
     let splitted: Vec<&str> = group.split(" ").collect();
     if i == 0 {
       bb_binds.0 = u16::from_str_radix(&splitted[0][2..], 16).unwrap();
       bb_binds.1 = u16::from_str_radix(&splitted[1][2..], 16).unwrap();
+      bb_binds.2 = splitted[2].parse::<i32>().unwrap();
 
       continue;
     }
@@ -117,7 +119,7 @@ fn main() {
     let bb = (bb * 10f32) as u32;
     let bb = if bb % 2 == 1 { bb + 1 } else { bb };
 
-    options.push((perc, Options { mode: OptionsMode::BB { bb_inc: bb_binds.0, bb_dec: bb_binds.1, bb } }));
+    options.push((perc, Options { mode: OptionsMode::BB { bb_inc: bb_binds.0, bb_dec: bb_binds.1, bb_offset: bb_binds.2, bb } }));
   }
 
   let mut options_map: std::collections::HashMap<u32, Vec<Options>, BuildHasherDefault<DefaultHasher>> =
@@ -158,8 +160,8 @@ fn main() {
                   unsafe { (input_simulator.key_up)(bind); };
                 }
               },
-              OptionsMode::BB { bb_inc, bb_dec, bb } => {
-                let curr_bb = data.physics.brake_bias - 0.05; // Ferrari 296 GT3 offset
+              OptionsMode::BB { bb_inc, bb_dec, bb_offset, bb } => {
+                let curr_bb = data.physics.brake_bias + (bb_offset as f32 / 100.0);
                 let curr_bb = (curr_bb * 1000.0) as u32;
                 let curr_bb = if curr_bb % 2 == 1 { curr_bb + 1 } else { curr_bb };
                 let bb_diff = curr_bb as i32 - bb as i32;
