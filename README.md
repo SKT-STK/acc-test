@@ -6,7 +6,7 @@ acc-test (im too lazy to change the name) is a simple command line program writt
 
 ## How does it work? ##
 
-The program utilizes ACC's API (shared memory region) to get the current track position as well as current brake-balance and uses a virtual keyboard that comes with Logitech G-Hub to automate keybind presses for specific TC levels and BB adjustments.
+The program utilizes ACC's API (shared memory region) to get the current track position as well as current brake-balance and uses a virtual keyboard that comes with Logitech G-Hub to automate keybind presses for specific TC levels and BB adjustments. *IMPORTANT*: YOU MUST HAVE LOGITECH G-HUB INSTALLED ON YOU PC, IT DOESNT HAVE TO BE RUNNING AND YOU DO NOT NEED ANY LOGITECH GEAR, JUST THE PROGRAM INSTALLED
 
 ## How to use? ##
 
