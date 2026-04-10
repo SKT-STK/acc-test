@@ -37,3 +37,7 @@ BB offsets for every car can be found in this PDF in the appendix 4: <https://as
 
 It is of course possible to use both functionalities at the same time, for example, take a look at my Ferrari 296 GT3 at SPA setup:  
 `acc-test.exe (8 0x61 80) (25 0x62) (76 0x60) (92 0x62) [0x63 0x65 -5] [92 54.0] [0 50.0] [8 56.4]`
+
+## 3rd party ##
+
+The InputSimulator.dll is courtesy of @Chaoses-Ib <https://github.com/Chaoses-Ib/IbInputSimulator>
