@@ -17,7 +17,8 @@ To use the tool, execute the .exe from the terminal with the following options:
 - BB adjustments as pairs of track percentage and requested BB within brackets,  
 
 additionally, if you wish to use the BB functionality you must include keybind hex-codes for increasing and decreasing BB as well as a car-specific offset in brackets before any actual BB points.  
-If thats too confusing, see examples below.
+If thats too confusing, see examples below.  
+To know what track % is where you can launch the program with a `--test` flag which will print out your current position in % continuously.
 
 ### Usage Examples ###
 

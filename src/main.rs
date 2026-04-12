@@ -1,6 +1,5 @@
 use std::{ffi::c_void, hash::{BuildHasherDefault, DefaultHasher}, ptr::null_mut};
 use acc_shared_memory_rs::{ACCError, ACCSharedMemory};
-use itertools::Itertools;
 
 struct InputSimulator {
   init: unsafe extern "C" fn(u32, u32, *mut c_void) -> u32,
@@ -57,7 +56,13 @@ enum OptionsMode {
 }
 
 fn main() {
-  let args_str = std::env::args().skip(1).join(" ");
+  let mut print_perc = false;
+  let args_str_arr = std::env::args().skip(1).collect::<Vec<String>>();
+  if args_str_arr.len() == 1 && args_str_arr[0] == "--test" {
+    print_perc = true;
+  }
+
+  let args_str = args_str_arr.join(" ");
   let mut options_str_tc: Vec<String> = Vec::new();
   let mut options_str_bb: Vec<String> = Vec::new();
   let mut temp_str_tc = String::new();
@@ -148,6 +153,13 @@ fn main() {
   loop {
     if let Some(data) = acc.read_shared_memory().unwrap() {
       let track_perc = (data.graphics.normalized_car_position * 100.0) as u32;
+
+      if print_perc {
+        println!("Current track %: {}", track_perc);
+        std::thread::sleep(duration_16ms);
+        continue;
+      }
+
       if track_perc != last_track_perc {
         if let Some(options) = options_map.get(&track_perc) {
           for option in options {
