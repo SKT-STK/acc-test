@@ -42,3 +42,7 @@ It is of course possible to use both functionalities at the same time, for examp
 ## 3rd party ##
 
 The InputSimulator.dll is courtesy of @Chaoses-Ib <https://github.com/Chaoses-Ib/IbInputSimulator>
+
+## Known issues ##
+
+- The program crashes when `Crew Chief` is ran before it.
